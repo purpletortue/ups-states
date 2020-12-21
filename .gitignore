@@ -1,6 +1,3 @@
-#Temporary exclude
-example-structure/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -130,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+vars/
+ansible.cfg
+*.retry
+inventory
+repo/**
+roles/test/**
+app-files/
+roles/telegraf/files/telegraf_*
