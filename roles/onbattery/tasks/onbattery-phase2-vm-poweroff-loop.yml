@@ -1,0 +1,42 @@
+---
+#Version 1.0.0
+- name: "Update vm states"
+  become: no
+  vmware_vm_info:
+    hostname: "{{esx_hostname}}"
+    username: "{{esx_username}}"
+    password: "{{esx_password}}"
+    validate_certs: yes
+    vm_type: vm
+    show_attribute: yes
+  delegate_to: localhost
+  register: vm_info
+
+- set_fact:
+    powered_vms: []
+
+- set_fact:
+    powered_vms: "{{powered_vms}} + ['{{item.guest_name}}']"
+  with_items: "{{vm_info.virtual_machines}}"
+  when:
+    - "item.power_state != 'poweredOff'"
+    - item.guest_name not in infrastructure
+
+- name: "Hard poweroff vms round {{round}}"
+  become: no
+  vmware_guest_powerstate:
+    hostname: "{{esx_hostname}}"
+    username: "{{esx_username}}"
+    password: "{{esx_password}}"
+    validate_certs: yes
+    name: "{{item}}"
+    state: powered-off
+    force: yes
+    state_change_timeout: 0
+  delegate_to: localhost
+  ignore_errors: yes
+  loop: "{{powered_vms}}"
+
+- pause:
+    seconds: 30
+  when: powered_vms|length > 0

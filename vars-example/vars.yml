@@ -1,0 +1,8 @@
+---
+powered_vms: []
+infrastructure:
+  - criticalserver1
+  - criticalserver2
+server5_deps:
+  - server9
+  - server7
