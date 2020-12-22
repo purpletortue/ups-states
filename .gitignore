@@ -129,10 +129,4 @@ dmypy.json
 .pyre/
 
 vars/
-ansible.cfg
 *.retry
-inventory
-repo/**
-roles/test/**
-app-files/
-roles/telegraf/files/telegraf_*
