@@ -14,18 +14,3 @@
     status_code: 200
     body_format: json
   ignore_errors: yes
-
-- name: Shutdown {{backup_nas_hostname}}
-  uri:
-    url: https://{{backup_nas_hostname}}/api/v2.0/system/shutdown
-    user: "{{backup_nas_username}}"
-    password: "{{backup_nas_password}}"
-    method: POST
-    body: >
-      {
-        "delay": 0
-      }
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-  ignore_errors: yes
