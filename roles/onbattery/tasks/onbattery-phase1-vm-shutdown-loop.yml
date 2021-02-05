@@ -6,7 +6,7 @@
     hostname: "{{esx_hostname}}"
     username: "{{esx_username}}"
     password: "{{esx_password}}"
-    validate_certs: yes
+    validate_certs: no
     vm_type: vm
     show_attribute: yes
   delegate_to: localhost
@@ -28,7 +28,7 @@
     hostname: "{{esx_hostname}}"
     username: "{{esx_username}}"
     password: "{{esx_password}}"
-    validate_certs: yes
+    validate_certs: no
     name: "{{item}}"
     state: shutdown-guest
     state_change_timeout: 0
@@ -45,7 +45,7 @@
     hostname: "{{esx_hostname}}"
     username: "{{esx_username}}"
     password: "{{esx_password}}"
-    validate_certs: yes
+    validate_certs: no
     name: "{{item}}"
     state: shutdown-guest
     state_change_timeout: 0
