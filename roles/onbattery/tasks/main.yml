@@ -82,8 +82,15 @@
     - powered_vms|length > 0
 
 # #####################################
-# Enter Phase 3 (Graceful NAS shutdown)
+# Enter Phase 3 (Graceful ESXi shutdown)
 # #####################################
 
 - include_tasks:
-    file: onbattery-phase3-nas-shutdown.yml
+    file: onbattery-phase3-esxi-shutdown.yml
+
+# #####################################
+# Enter Phase 4 (Graceful NAS shutdown)
+# #####################################
+
+- include_tasks:
+    file: onbattery-phase4-nas-shutdown.yml

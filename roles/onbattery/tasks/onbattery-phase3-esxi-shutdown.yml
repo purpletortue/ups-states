@@ -1,0 +1,36 @@
+---
+#Version 1.0.0
+# - name: "Update vm states"
+#   become: no
+#   vmware_vm_info:
+#     hostname: "{{esx_hostname}}"
+#     username: "{{esx_username}}"
+#     password: "{{esx_password}}"
+#     validate_certs: no
+#     vm_type: vm
+#     show_attribute: yes
+#   delegate_to: localhost
+#   register: vm_info
+#
+# - set_fact:
+#     powered_vms: []
+#
+# - set_fact:
+#     powered_vms: "{{powered_vms}} + ['{{item.guest_name}}']"
+#   with_items: "{{vm_info.virtual_machines}}"
+#   when:
+#     - "item.power_state != 'poweredOff'"
+#     - item.guest_name not in infrastructure
+
+- name: "Shutdown {{esx_hostname}}"
+  become: no
+  vmware_host_powerstate:
+    hostname: "{{esx_hostname}}"
+    username: "{{esx_username}}"
+    password: "{{esx_password}}"
+    validate_certs: no
+    esxi_hostname: "{{esx_hostname}}"
+    state: shutdown-host
+    force: yes
+  delegate_to: localhost
+  ignore_errors: yes
